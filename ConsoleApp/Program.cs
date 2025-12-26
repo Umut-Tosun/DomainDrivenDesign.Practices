@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
+using MediatR;
 
 namespace ConsoleApp
 {
@@ -11,12 +12,100 @@ namespace ConsoleApp
             // A a2 = new(guid);
             // Console.WriteLine(a1.Equals(a2));
 
+            // BenchmarkRunner.Run<BenchmakService>();
+          
 
+           
 
-            BenchmarkRunner.Run<BenchmakService>();
-            
+           
+
+            //DomainEventsDispatcher.Dispatch(order.DomainEvents);
+
+        }
+    }
+    public class StockUpdateHandler : INotificationHandler<OrderCompletedEvent>
+    {
+        public Task Handle(OrderCompletedEvent notification, CancellationToken cancellationToken)
+        {
+            Console.WriteLine($"StockUpdateHandler tetiklendi. OrderId: {notification.Id}");
+            return Task.CompletedTask;
+        }
+    }
+    public class SendMailHandler : INotificationHandler<OrderCompletedEvent>
+    {
+        public Task Handle(OrderCompletedEvent notification, CancellationToken cancellationToken)
+        {
+            Console.WriteLine($"SendMailHandler tetiklendi. OrderId: {notification.Id}");
+            return Task.CompletedTask;
+        }
+    }
+    public class SendSmsHandler : INotificationHandler<OrderCompletedEvent>
+    {
+        public Task Handle(OrderCompletedEvent notification, CancellationToken cancellationToken)
+        {
+            Console.WriteLine($"SendSmsHandler tetiklendi. OrderId: {notification.Id}");
+            return Task.CompletedTask;
+        }
+    }
+    public class OrderCompletedEvent : INotification
+    {
+        public int Id { get; }
+        public OrderCompletedEvent(int orderId)
+        {
+            Id = orderId;
+        }
+    }
+    public class Order
+    {
+        private readonly IMediator  mediator;
+
+        public Order(IMediator mediator)
+        {
+            this.mediator = mediator;
         }
 
+        public int Id { get; set; }
+        public string? ProductName { get; set; }
+        public List<IDomainEvent> DomainEvents { get; } = new();
+        public void CreateOrder(int id, string productName)
+        {
+            Id = id;
+            ProductName = productName;
+
+            mediator.Publish(new OrderCompletedEvent(id));
+
+            //bazi islemlerin tetiklenmesi
+            //DomainEvents.Add(new OrderCreatedEvent(id));
+        }
+    }
+    public static class DomainEventsDispatcher
+    {
+        public static void Dispatch(IEnumerable<IDomainEvent> domainEvents)
+        {
+            foreach (var domainEvent in domainEvents)
+            {
+                switch (domainEvent)
+                {
+                    case OrderCreatedEvent orderCreatedEvent:
+                        Console.WriteLine($"Order Created Event Tetiklendi. OrderId: {orderCreatedEvent.OrderId}");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    public interface IDomainEvent
+    {
+
+    }
+    public class OrderCreatedEvent : IDomainEvent
+    {
+        public int OrderId { get; }
+        public OrderCreatedEvent(int orderId)
+        {
+            OrderId = orderId;
+        }
     }
     public abstract class Entity
     {
