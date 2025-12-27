@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DomainDrivenDesign.Practices.Application.Features.Products.CreateProduct;
 
-internal sealed class CreateProductCommandHandler(IProductRepository productRepository, IunitOfWork unitOfWork) : IRequestHandler<CreateProductCommand>
+internal sealed class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand>
 {
     public async Task Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {

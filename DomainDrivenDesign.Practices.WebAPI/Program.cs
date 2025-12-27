@@ -3,6 +3,7 @@ using DomainDrivenDesign.Practices.Infrastructure;
 using DomainDrivenDesign.Practices.Domain.Users.Events;
 using MediatR;
 using Scalar.AspNetCore;
+using DomainDrivenDesign.Practices.Infrastructure.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();

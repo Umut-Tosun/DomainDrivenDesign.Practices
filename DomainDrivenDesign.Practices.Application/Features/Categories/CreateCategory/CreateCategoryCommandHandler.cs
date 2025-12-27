@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DomainDrivenDesign.Practices.Application.Features.Categories.CreateCategory;
 
-internal sealed class CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IunitOfWork ıunitOfWork) : IRequestHandler<CreateCategoryCommand>
+internal sealed class CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork ıunitOfWork) : IRequestHandler<CreateCategoryCommand>
 {
     public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {

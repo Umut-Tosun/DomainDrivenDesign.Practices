@@ -5,22 +5,23 @@ using DomainDrivenDesign.Practices.Domain.Products;
 using DomainDrivenDesign.Practices.Domain.Users;
 using DomainDrivenDesign.Practices.Infrastructure.Context;
 using DomainDrivenDesign.Practices.Infrastructure.Repositories;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DomainDrivenDesign.Practices.Infrastructure;
-
+namespace DomainDrivenDesign.Practices.Infrastructure.Infrastructure;
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services)
     {
+
         services.AddScoped<ApplicationDbContext>();
-        services.AddScoped<IunitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IUnitOfWork>(opt => opt.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
-
         return services;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainDrivenDesign.Practices.Domain.Abstractions
 {
-    public interface IunitOfWork
+    public interface IUnitOfWork
     {
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

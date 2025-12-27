@@ -4,7 +4,7 @@ using MediatR;
 
 namespace DomainDrivenDesign.Practices.Application.Features.Orders.CreateOrder;
 
-internal sealed class CreateOrderCommandHandler(IOrderRepository orderRepository, IunitOfWork unitOfWork,IMediator mediator) : IRequestHandler<CreateOrderCommand>
+internal sealed class CreateOrderCommandHandler(IOrderRepository orderRepository, IUnitOfWork unitOfWork,IMediator mediator) : IRequestHandler<CreateOrderCommand>
 {
     public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
