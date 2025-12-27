@@ -24,6 +24,7 @@ internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserComma
        var user = await userRepository.CreateAsync(
             request.username,
             request.email,
+            request.password,
             request.country,
             request.city,
             request.street,

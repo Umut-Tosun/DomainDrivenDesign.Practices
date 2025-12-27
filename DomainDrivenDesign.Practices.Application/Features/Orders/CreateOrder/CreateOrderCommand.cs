@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DomainDrivenDesign.Practices.Domain.Orders;
+using MediatR;
 using static DomainDrivenDesign.Practices.Domain.Orders.Order;
 
 namespace DomainDrivenDesign.Practices.Application.Features.Orders.CreateOrder;

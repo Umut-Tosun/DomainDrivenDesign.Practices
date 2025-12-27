@@ -5,6 +5,9 @@ namespace DomainDrivenDesign.Practices.Domain.Users;
 
 public sealed class User : Entity
 {
+    public User(Guid id) : base(id)
+    {
+    }
     private User(Guid Id, Name name, Email email, Password password, Address address) : base(Id)
     {
         Name = name;
@@ -12,6 +15,8 @@ public sealed class User : Entity
         Password = password;
         Address = address;
     }
+
+    
 
     public Name Name { get; set; } = default!;
     public Email Email { get; set; } = default!;

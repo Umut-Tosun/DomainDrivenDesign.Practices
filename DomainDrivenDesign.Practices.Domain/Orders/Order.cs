@@ -6,6 +6,10 @@ namespace DomainDrivenDesign.Practices.Domain.Orders;
 
 public sealed  class Order : Entity
 {
+    public Order(Guid id) : base(id)
+    {
+    }
+
     public Order(Guid id, string orderNumber, DateTime dateTime, OrderStatusEnum status) : base(id)
     {
         Id = id;

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDrivenDesign.Practice
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDrivenDesign.Practices.Infrastructure", "DomainDrivenDesign.Practices.Infrastructure\DomainDrivenDesign.Practices.Infrastructure.csproj", "{8CDBD39D-9E81-4489-880F-3744BCB1C3E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDrivenDesign.Practices.WebAPI", "DomainDrivenDesign.Practices.WebAPI\DomainDrivenDesign.Practices.WebAPI.csproj", "{B087DA65-2C99-45E3-857D-2378342A56B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8CDBD39D-9E81-4489-880F-3744BCB1C3E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CDBD39D-9E81-4489-880F-3744BCB1C3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CDBD39D-9E81-4489-880F-3744BCB1C3E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B087DA65-2C99-45E3-857D-2378342A56B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B087DA65-2C99-45E3-857D-2378342A56B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B087DA65-2C99-45E3-857D-2378342A56B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B087DA65-2C99-45E3-857D-2378342A56B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
