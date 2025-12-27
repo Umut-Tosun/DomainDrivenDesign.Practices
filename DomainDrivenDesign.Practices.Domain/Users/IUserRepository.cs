@@ -10,7 +10,7 @@ namespace DomainDrivenDesign.Practices.Domain.Users
     {
       
 
-        Task CreateAsync(string username, string email, string country, string city, string street, string postalCode, string fullAddress, CancellationToken cancellationToken = default);
+        Task<User> CreateAsync(string username, string email, string password, string country, string city, string street, string postalCode, string fullAddress, CancellationToken cancellationToken = default);
 
         Task<List<User>> GetAllAsync(CancellationToken cancellationToken = default);
     }

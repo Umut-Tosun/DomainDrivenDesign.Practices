@@ -4,7 +4,7 @@ using static DomainDrivenDesign.Practices.Domain.Orders.Order;
 
 namespace DomainDrivenDesign.Practices.Domain.Orders;
 
-public sealed partial class Order : Entity
+public sealed  class Order : Entity
 {
     public Order(Guid id, string orderNumber, DateTime dateTime, OrderStatusEnum status) : base(id)
     {
@@ -17,7 +17,7 @@ public sealed partial class Order : Entity
     public string OrderNumber { get; private set; } = default!;
     public DateTime DateTime { get; private set; }
     public OrderStatusEnum Status { get; private set; } = default!;
-    public ICollection<OrderLine> OrderLines { get; private set; }
+    public ICollection<OrderLine> OrderLines { get; private set; } = new List<OrderLine>();
 
 
     public void CreateOrder(List<CreateOrderDto> createOrderDtos)

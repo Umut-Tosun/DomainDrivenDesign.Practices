@@ -1,6 +1,6 @@
 ﻿namespace DomainDrivenDesign.Practices.Domain.Products;
 
-internal interface IProductRepository
+public interface IProductRepository
 {
     Task CreateAsync(string name,int quantity,decimal amount,string currency,Guid categoryId,CancellationToken cancellationToken = default);
 

@@ -1,28 +1,38 @@
 ﻿using BenchmarkDotNet.Running;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleApp
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            //Guid guid = Guid.NewGuid();
-            // A a1 = new(guid);
-            // A a2 = new(guid);
-            // Console.WriteLine(a1.Equals(a2));
+            var services = new ServiceCollection();
 
-            // BenchmarkRunner.Run<BenchmakService>();
+
+            services.AddLogging();
+
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblyContaining<Program>();
+
+                cfg.LicenseKey = "eyJhbGciOiJSUzI1NiIsImtpZCI6Ikx1Y2t5UGVubnlTb2Z0d2FyZUxpY2Vuc2VLZXkvYmJiMTNhY2I1OTkwNGQ4OWI0Y2IxYzg1ZjA4OGNjZjkiLCJ0eXAiOiJKV1QifQ...";
+            });
+
+            var serviceProvider = services.BuildServiceProvider();
+
           
+            var mediator = serviceProvider.GetRequiredService<IMediator>();
 
            
+            var order = new Order(mediator);
 
-           
-
-            //DomainEventsDispatcher.Dispatch(order.DomainEvents);
-
+          
+            await order.CreateOrder(1, "Laptop");
         }
     }
+
     public class StockUpdateHandler : INotificationHandler<OrderCompletedEvent>
     {
         public Task Handle(OrderCompletedEvent notification, CancellationToken cancellationToken)
@@ -57,7 +67,7 @@ namespace ConsoleApp
     }
     public class Order
     {
-        private readonly IMediator  mediator;
+        private readonly IMediator mediator;
 
         public Order(IMediator mediator)
         {
@@ -67,15 +77,12 @@ namespace ConsoleApp
         public int Id { get; set; }
         public string? ProductName { get; set; }
         public List<IDomainEvent> DomainEvents { get; } = new();
-        public void CreateOrder(int id, string productName)
+        public async Task CreateOrder(int id, string productName)
         {
             Id = id;
             ProductName = productName;
 
-            mediator.Publish(new OrderCompletedEvent(id));
-
-            //bazi islemlerin tetiklenmesi
-            //DomainEvents.Add(new OrderCreatedEvent(id));
+            await mediator.Publish(new OrderCompletedEvent(id));
         }
     }
     public static class DomainEventsDispatcher

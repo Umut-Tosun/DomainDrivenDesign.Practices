@@ -7,9 +7,9 @@ using static DomainDrivenDesign.Practices.Domain.Orders.Order;
 
 namespace DomainDrivenDesign.Practices.Domain.Orders
 {
-    internal interface IOrderRepository
+    public interface IOrderRepository
     {
-        Task CreateAsync(List<CreateOrderDto> createOrderDtos);
+        Task<Order> CreateAsync(List<CreateOrderDto> createOrderDtos);
         Task<List<Order>> GetAllAsync(CancellationToken cancellationToken = default);
     }
 }
