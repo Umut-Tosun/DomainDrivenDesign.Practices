@@ -11,7 +11,7 @@ internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserComma
     private readonly IunitOfWork unitOfWork;
     private readonly IMediator mediator;
 
-    public CreateUserCommandHandler(IUserRepository userRepository, IunitOfWork unitOfWork, IMediator mediator)
+    public CreateUserCommandHandler(IUserRepository userRepository, IunitOfWork unitOfWork,IMediator mediator)
     {
         this.userRepository = userRepository;
         this.unitOfWork = unitOfWork;
@@ -21,33 +21,19 @@ internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserComma
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
+       var user = await userRepository.CreateAsync(
+            request.username,
+            request.email,
+            request.password,
+            request.country,
+            request.city,
+            request.street,
+            request.postalCode,
+            request.fullAddress,
+            cancellationToken);
 
-        try
-        {
-            var user = await userRepository.CreateAsync(
-                request.username,
-                request.email,
-                request.password,
-                request.country,
-                request.city,
-                request.street,
-                request.postalCode,
-                request.fullAddress,
-                cancellationToken);
-
-            await unitOfWork.SaveChangesAsync(cancellationToken);
-
-            Console.WriteLine($"\n>>> PUBLISH ÖNCESİ - User ID: {user.Id}");
-            await mediator.Publish(new UserDomainEvent(user));
-            Console.WriteLine($">>> PUBLISH SONRASI\n");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"\n❌ HATA: {ex.Message}");
-            Console.WriteLine($"Stack: {ex.StackTrace}");
-            throw;
-        }
-
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+        await mediator.Publish(new UserDomainEvent(user), cancellationToken);        
 
     }
 }
