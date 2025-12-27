@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Create(CreateUserCommand command,CancellationToken cancellationToken)
     {
         var result = mediator.Send(command,cancellationToken);
-        return Ok(result);
+        return Ok(new { message = "Kullanıcı başarıyla oluşturuldu" });
     }
     [HttpPost]
     public async Task<IActionResult> GetAll(GetAllUserQuery request,CancellationToken cancellationToken)

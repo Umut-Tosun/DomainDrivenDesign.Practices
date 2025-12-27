@@ -23,7 +23,7 @@ namespace DomainDrivenDesign.Practices.WebAPI.Controllers
         public async Task<IActionResult> Create(CreateOrderCommand command, CancellationToken cancellationToken)
         {
             var result = mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return Ok(new { message = "Siparis başarıyla oluşturuldu" });
         }
         [HttpPost]
         public async Task<IActionResult> GetAll(GetAllOrderQuery request, CancellationToken cancellationToken)

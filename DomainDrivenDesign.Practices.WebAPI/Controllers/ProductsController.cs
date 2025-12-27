@@ -20,7 +20,7 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> Create(CreateProductCommand command, CancellationToken cancellationToken)
     {
         var result = mediator.Send(command, cancellationToken);
-        return Ok(result);
+        return Ok(new { message = "Urun başarıyla oluşturuldu" });
     }
     [HttpPost]
     public async Task<IActionResult> GetAll(GetAllProductQuery request, CancellationToken cancellationToken)

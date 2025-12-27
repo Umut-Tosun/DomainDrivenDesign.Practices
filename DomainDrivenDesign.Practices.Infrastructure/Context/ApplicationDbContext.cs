@@ -25,6 +25,10 @@ namespace DomainDrivenDesign.Practices.Infrastructure.Context
         public DbSet<OrderLine> orderLines { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<Category> categories { get; set; }
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

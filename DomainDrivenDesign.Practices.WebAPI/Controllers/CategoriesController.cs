@@ -20,7 +20,7 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> Create(CreateCategoryCommand command, CancellationToken cancellationToken)
     {
         var result = mediator.Send(command, cancellationToken);
-        return Ok(result);
+        return Ok(new { message = "Kategori başarıyla oluşturuldu" });
     }
     [HttpPost]
     public async Task<IActionResult> GetAll(GetAllCategoryQuery request, CancellationToken cancellationToken)
